@@ -1,6 +1,5 @@
-import { ref, computed } from 'vue'
 import { defineStore } from 'pinia'
-import artist from '@/artist.js'
+import artist from '@/artist.json'
 export const useSongStore = defineStore('song', {
   state: () => ({
     isPlaying: false,
@@ -21,7 +20,7 @@ export const useSongStore = defineStore('song', {
 
       this.audio = new Audio()
       this.audio.src = track.path
-
+      // this.audio.value.volume = 0.5
       setTimeout(() => {
         this.isPlaying = true
         this.audio.play()
@@ -40,7 +39,7 @@ export const useSongStore = defineStore('song', {
 
     playOrPauseThisSong(artist, track) {
       if (!this.audio || !this.audio.src || this.currentTrack.id !== track.id) {
-        this.loadSong(artist.track)
+        this.loadSong(artist, track)
         return
       }
       this.playOrPauseSong()
@@ -62,7 +61,7 @@ export const useSongStore = defineStore('song', {
     },
     playFromFirst() {
       this.resetState()
-      let track = artist.track[0]
+      let track = artist.tracks[0]
       this.loadSong(artist, track)
     },
 
@@ -71,6 +70,7 @@ export const useSongStore = defineStore('song', {
       this.audio = null
       this.currentArtist = null
       this.currentTrack = null
-    }
+    },
+    persist: true
   }
 })
