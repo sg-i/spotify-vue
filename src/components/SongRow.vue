@@ -1,5 +1,5 @@
 <script setup>
-import { ref, toRefs, onMounted, watch, watchEffect } from 'vue'
+import { ref, toRefs, onMounted } from 'vue'
 import Heart from 'vue-material-design-icons/Heart.vue'
 import Play from 'vue-material-design-icons/Play.vue'
 import Pause from 'vue-material-design-icons/Pause.vue'

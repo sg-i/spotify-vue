@@ -13,7 +13,7 @@ import { storeToRefs } from 'pinia'
 
 const useSong = useSongStore()
 const { isPlaying, audio, currentTrack, currentArtist } = storeToRefs(useSong)
-
+let isHoverMainPlayPauseButton = ref(false)
 let isHover = ref(false)
 let isTrackTimeCurrent = ref('0:00')
 let isTrackTimeTotal = ref(null)
@@ -216,19 +216,41 @@ watch(
     <div class="max-w-[35%] mx-auto w-2/4">
       <div class="flex-col items-center justify-center">
         <div class="buttons flex items-center justify-center h-[30px]">
-          <button class="mx-2">
-            <SkipBackward fillColor="#FFFFFF" :size="25" @click="useSong.prevSong(currentTrack)" />
-          </button>
-          <button
-            class="p-1 rounded-full mx-3 bg-white"
-            @click="useSong.playOrPauseSong(currentArtist, currentTrack)"
-          >
-            <Play v-if="!isPlaying" fillColor="#181818" :size="25" />
-            <Pause v-else fillColor="#181818" :size="25" />
-          </button>
-          <button class="mx-2">
-            <SkipForward fillColor="#FFFFFF" :size="25" @click="useSong.nextSong(currentTrack)" />
-          </button>
+          <div class="flex justify-between w-[150px]">
+            <button class="mx-2">
+              <SkipBackward
+                class="text-zinc-300 hover:text-white"
+                :size="25"
+                @click="useSong.prevSong(currentTrack)"
+              />
+            </button>
+            <button
+              class="p-1 rounded-full mx-3 bg-white"
+              @click="useSong.playOrPauseSong(currentArtist, currentTrack)"
+            >
+              <Play
+                v-if="!isPlaying"
+                fillColor="#181818"
+                @mouseover="isHoverMainPlayPauseButton = true"
+                @mouseout="isHoverMainPlayPauseButton = false"
+                :size="isHoverMainPlayPauseButton ? 27 : 25"
+              />
+              <Pause
+                v-else
+                fillColor="#181818"
+                @mouseover="isHoverMainPlayPauseButton = true"
+                @mouseout="isHoverMainPlayPauseButton = false"
+                :size="isHoverMainPlayPauseButton ? 27 : 25"
+              />
+            </button>
+            <button class="mx-2">
+              <SkipForward
+                class="text-zinc-300 hover:text-white"
+                :size="25"
+                @click="useSong.nextSong(currentTrack)"
+              />
+            </button>
+          </div>
         </div>
       </div>
       <div class="flex items-center h-[25px]">
@@ -265,7 +287,10 @@ watch(
     <div class="flex items-center w-1/4 justify-end pr-10">
       <MusicPlayerVolume />
       <div class="cursor-pointer ml-4" @click="togglePiPMode">
-        <PictureInPictureBottomRight class="" fillColor="#FFFFFF" :size="18" />
+        <PictureInPictureBottomRight
+          :class="isPipToggled ? 'text-green-500' : 'text-zinc-300 hover:text-white'"
+          :size="18"
+        />
       </div>
     </div>
   </div>

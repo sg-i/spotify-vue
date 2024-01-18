@@ -23,21 +23,24 @@ onMounted(() => {
   })
 })
 const muteMusic = () => {
-  volBeforeMute.value = vol.value
+  volBeforeMute.value = AudioVolume.value
+  AudioVolume.value = 0
   vol.value = 0
   audio.value.volume = 0
+  console.log(volBeforeMute.value)
 }
 const unMuteMusic = () => {
-  vol.value = volBeforeMute.value
-  audio.value.volume = Number(volBeforeMute.value / 100)
+  AudioVolume.value = volBeforeMute.value
+  vol.value = volBeforeMute.value * 100
+  audio.value.volume = AudioVolume.value
 }
 </script>
 <template>
-  <div v-if="vol == 0" @click="unMuteMusic">
-    <VolumeMute fillColor="#FFFFFF" :size="20" />
+  <div class="cursor-pointer" v-if="vol == 0" @click="unMuteMusic">
+    <VolumeMute class="text-zinc-300 hover:text-white" :size="20" />
   </div>
-  <div v-else @click="muteMusic">
-    <VolumeHigh fillColor="#FFFFFF" :size="20" />
+  <div class="cursor-pointer" v-else @click="muteMusic">
+    <VolumeHigh class="text-zinc-300 hover:text-white" :size="20" />
   </div>
   <div
     class="flex items-center ml-2 w-[150px] rounded-full relative mt-2 mb-[23px]"
