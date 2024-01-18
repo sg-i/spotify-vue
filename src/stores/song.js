@@ -5,7 +5,8 @@ export const useSongStore = defineStore('song', {
     isPlaying: false,
     audio: null,
     currentArtist: null,
-    currentTrack: null
+    currentTrack: null,
+    volume: 0.4
   }),
   actions: {
     loadSong(artist, track) {
@@ -20,13 +21,21 @@ export const useSongStore = defineStore('song', {
 
       this.audio = new Audio()
       this.audio.src = track.path
-      // this.audio.value.volume = 0.5
+      this.audio.volume = this.volume
       setTimeout(() => {
         this.isPlaying = true
         this.audio.play()
       }, 200)
     },
+    loadDefaultSong() {
+      const track = artist.tracks[1]
+      this.currentArtist = artist
+      this.currentTrack = track
 
+      this.audio = new Audio()
+      this.audio.src = track.path
+      this.audio.id = 'MusicPlayerAudioID'
+    },
     playOrPauseSong() {
       if (this.audio.paused) {
         this.isPlaying = true
@@ -46,13 +55,18 @@ export const useSongStore = defineStore('song', {
     },
 
     prevSong(currentTrack) {
-      let track = artist.tracks[currentTrack.id - 2]
+      let track
+      if (currentTrack.id === artist.tracks[0].id) {
+        track = artist.tracks[artist.tracks.length - 1]
+      } else {
+        track = artist.tracks[currentTrack.id - 2]
+      }
       this.loadSong(artist, track)
     },
 
     nextSong(currentTrack) {
       if (currentTrack.id === artist.tracks.length) {
-        let track = artist.track[0]
+        let track = artist.tracks[0]
         this.loadSong(artist, track)
       } else {
         let track = artist.tracks[currentTrack.id]

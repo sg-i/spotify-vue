@@ -12,10 +12,15 @@ import ChevronLeft from 'vue-material-design-icons/ChevronLeft.vue'
 import { useSongStore } from '@/stores/song'
 import { storeToRefs } from 'pinia'
 
+import artist from '@/artist.json'
+
 const useSong = useSongStore()
 const { isPlaying, currentTrack } = storeToRefs(useSong)
 
 onMounted(() => {
+  // isPlaying.value = true
+  // useSong.loadSong(artist, artist.tracks[0])
+  useSong.loadDefaultSong()
   isPlaying.value = false
 })
 

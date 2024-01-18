@@ -5,77 +5,71 @@ import HomeCard from '@/components/HomeCard.vue'
 <template>
   <div class="p-8">
     <button type="button" class="text-white text-2xl font-semibold hover:underline cursor-pointer">
-      Podcasts to make you smarter
+      Podcasts of the Week
     </button>
 
     <div class="py-1.5"></div>
 
-    <div class="flex items-center">
+    <div class="flex items-center flex-wrap">
       <HomeCard
         :image="`https://source.unsplash.com/random/300x300?sig=${Math.random()}`"
-        title="Title is here"
-        subTitle="Subtitle is here"
+        title="Serene Sunset"
+        subTitle="Nature's Beauty"
       />
       <HomeCard
         :image="`https://source.unsplash.com/random/300x300?sig=${Math.random()}`"
-        title="Title is here"
-        subTitle="Subtitle is here"
+        title="Tech Innovations"
+        subTitle="Shaping Tomorrow"
       />
       <HomeCard
-        class="md:block hidden"
         :image="`https://source.unsplash.com/random/300x300?sig=${Math.random()}`"
-        title="Title is here"
-        subTitle="Subtitle is here"
+        title="Urban Explorations"
+        subTitle="City Vibes"
       />
       <HomeCard
-        class="lg:block hidden"
         :image="`https://source.unsplash.com/random/300x300?sig=${Math.random()}`"
-        title="Title is here"
-        subTitle="Subtitle is here"
+        title="Whispers of Wisdom"
+        subTitle="Timeless Tales"
       />
       <HomeCard
-        class="xl:block hidden"
         :image="`https://source.unsplash.com/random/300x300?sig=${Math.random()}`"
-        title="Title is here"
-        subTitle="Subtitle is here"
+        title="Mystic Moonlight"
+        subTitle="Night's Embrace"
       />
     </div>
   </div>
   <div class="p-8">
     <button type="button" class="text-white text-2xl font-semibold hover:underline cursor-pointer">
-      Recommended radio
+      Recommended Radio
     </button>
 
     <div class="py-1.5"></div>
 
-    <div class="flex items-center">
+    <div class="flex items-center flex-wrap">
       <HomeCard
         :image="`https://source.unsplash.com/random/300x300?sig=${Math.random()}`"
-        title="Title is here"
-        subTitle="Subtitle is here"
+        title="Digital Dreams"
+        subTitle="Virtual Realities"
       />
       <HomeCard
         :image="`https://source.unsplash.com/random/300x300?sig=${Math.random()}`"
-        title="Title is here"
-        subTitle="Subtitle is here"
+        title="Whimsical Wonderland"
+        subTitle="Fantasy Adventure"
       />
       <HomeCard
-        class="md:block hidden"
         :image="`https://source.unsplash.com/random/300x300?sig=${Math.random()}`"
-        title="Title is here"
-        subTitle="Subtitle is here"
+        title="Harmony in Chaos"
+        subTitle="Balancing Act"
       />
       <HomeCard
-        class="lg:block hidden"
         :image="`https://source.unsplash.com/random/300x300?sig=${Math.random()}`"
-        title="Title is here"
-        subTitle="Subtitle is here"
+        title="Ethereal Echoes"
+        subTitle="Memories Unfolding"
       />
       <HomeCard
-        class="xl:block hidden"
         :image="`https://source.unsplash.com/random/300x300?sig=${Math.random()}`"
-        title="Title is here"
-        subTitle="Subtitle is here"
+        title="Journey Beyond Stars"
+        subTitle="Cosmic Odyssey"
       />
     </div>
   </div>

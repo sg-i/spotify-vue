@@ -24,35 +24,31 @@ import CategorySelect from '@/components/CategorySelect.vue'
         :image="`https://source.unsplash.com/random/300x300?sig=${Math.random()}`"
       />
       <CategorySelect
-        category="New Release"
+        category="New Releases"
         :image="`https://source.unsplash.com/random/300x300?sig=${Math.random()}`"
       />
       <CategorySelect
-        category="New Release"
+        category="Chill Vibes"
         :image="`https://source.unsplash.com/random/300x300?sig=${Math.random()}`"
       />
       <CategorySelect
-        category="Podcasts"
+        category="Explore Indie"
         :image="`https://source.unsplash.com/random/300x300?sig=${Math.random()}`"
       />
       <CategorySelect
-        category="Audiobooks"
+        category="Throwback Classics"
         :image="`https://source.unsplash.com/random/300x300?sig=${Math.random()}`"
       />
       <CategorySelect
-        category="Made For You"
+        category="Focus & Study"
         :image="`https://source.unsplash.com/random/300x300?sig=${Math.random()}`"
       />
       <CategorySelect
-        category="New Release"
+        category="Party Hits"
         :image="`https://source.unsplash.com/random/300x300?sig=${Math.random()}`"
       />
       <CategorySelect
-        category="New Release"
-        :image="`https://source.unsplash.com/random/300x300?sig=${Math.random()}`"
-      />
-      <CategorySelect
-        category="Podcasts"
+        category="Wellness & Fitness"
         :image="`https://source.unsplash.com/random/300x300?sig=${Math.random()}`"
       />
     </div>

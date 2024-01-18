@@ -8,7 +8,7 @@ import { useSongStore } from '@/stores/song'
 import { storeToRefs } from 'pinia'
 
 const useSong = useSongStore()
-const { audio } = storeToRefs(useSong)
+const { audio, volume: AudioVolume } = storeToRefs(useSong)
 
 let isHover = ref(false)
 
@@ -16,8 +16,10 @@ let vol = ref(40)
 let volume = ref(null)
 let volBeforeMute = ref(80)
 onMounted(() => {
+  audio.value.volume = AudioVolume.value
   volume.value.addEventListener('input', (e) => {
-    audio.value.volume = e.currentTarget.value / 100
+    AudioVolume.value = e.currentTarget.value / 100
+    audio.value.volume = AudioVolume.value
   })
 })
 const muteMusic = () => {
@@ -46,7 +48,7 @@ const unMuteMusic = () => {
       v-model="vol"
       ref="volume"
       type="range"
-      class="mt-[24px] absolute rounded-full my-2 w-full h-0 z-40 appearance-none bg-opacity-100 focus:outline-none accent-white"
+      class="cursor-pointer mt-[24px] absolute rounded-full my-2 w-full h-0 z-40 appearance-none bg-opacity-100 focus:outline-none accent-white"
       :class="{ rangeDotHidden: !isHover }"
     />
     <div

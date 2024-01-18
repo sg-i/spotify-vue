@@ -15,37 +15,53 @@ const useSong = useSongStore()
 const { isPlaying, audio, currentTrack, currentArtist } = storeToRefs(useSong)
 
 let isHover = ref(false)
-let isTrackTimeCurrent = ref(null)
+let isTrackTimeCurrent = ref('0:00')
 let isTrackTimeTotal = ref(null)
 let seeker = ref(null)
 let seekerContainer = ref(null)
 let range = ref(0)
 
+let isPlayingBefore = ref(false)
+
 onMounted(() => {
   if (audio.value) {
-    setTimeout(() => {
-      timeupdate()
-      loadedmetadata()
-    }, 300)
+    timeupdate()
+    loadedmetadata()
   }
 
   if (currentTrack.value) {
     seeker.value.addEventListener('change', function () {
+      console.log('seeker change')
       const time = audio.value.duration * (seeker.value.value / 100)
       audio.value.currentTime = time
     })
 
-    seeker.value.addEventListener('mousedown', function () {
+    seeker.value.addEventListener('mousedown', function (e) {
       audio.value.pause()
-      isPlaying.value = false
+
+      const clickPosition =
+        (e.pageX - seekerContainer.value.offsetLeft) / seekerContainer.value.offsetWidth
+      const time = audio.value.duration * clickPosition
+      audio.value.currentTime = time
+      seeker.value.value = (100 / audio.value.duration) * audio.value.currentTime
+
+      if (isPlaying.value) {
+        isPlayingBefore.value = true
+      } else {
+        isPlayingBefore.value = false
+      }
     })
 
     seeker.value.addEventListener('mouseup', function () {
-      audio.value.play()
-      isPlaying.value = true
+      console.log('mouseup')
+      if (isPlayingBefore.value) {
+        audio.value.play()
+        isPlaying.value = true
+      }
     })
 
     seekerContainer.value.addEventListener('click', function (e) {
+      console.log('click')
       const clickPosition =
         (e.pageX - seekerContainer.value.offsetLeft) / seekerContainer.value.offsetWidth
       const time = audio.value.duration * clickPosition
@@ -56,6 +72,7 @@ onMounted(() => {
 })
 
 const timeupdate = () => {
+  console.log('timeupdate')
   audio.value.addEventListener('timeupdate', function () {
     const minutes = Math.floor(audio.value.currentTime / 60)
     const seconds = Math.floor(audio.value.currentTime - minutes * 60)
@@ -66,10 +83,12 @@ const timeupdate = () => {
   })
 }
 const loadedmetadata = () => {
+  console.log('loadedmetadata')
   audio.value.addEventListener('loadedmetadata', function () {
     const duration = audio.value.duration
     const minutes = Math.floor(duration / 60)
     const seconds = Math.floor(duration % 60)
+    console.log('meta')
     isTrackTimeTotal.value = minutes + ':' + seconds.toString().padStart(2, '0')
   })
 }
@@ -81,6 +100,7 @@ watch(
     loadedmetadata()
   }
 )
+
 watch(
   () => isTrackTimeCurrent.value,
   (time) => {
@@ -89,9 +109,83 @@ watch(
     }
   }
 )
+import { useAudioPictureInPicture } from '@/hooks/useAudioPictureInPicture'
+const PlayPausePip = () => {
+  console.log('testfunc')
+  useSong.playOrPauseSong()
+}
+const NextPip = () => {
+  console.log('testfunc')
+  useSong.nextSong(currentTrack.value)
+}
+const PrevPip = () => {
+  console.log('testfunc')
+  useSong.prevSong(currentTrack.value)
+}
+const { isPipToggled, togglePip } = useAudioPictureInPicture(
+  currentArtist.value.albumCover,
+  isPlaying.value,
+  PlayPausePip,
+  PlayPausePip,
+  PrevPip,
+  NextPip
+)
+
+const togglePiPMode = () => {
+  togglePip()
+  if (!isPipToggled.value) {
+    // Если режим PiP не включен, добавляем слушатели событий
+    audio.value.addEventListener('play', handlePlay)
+    audio.value.addEventListener('pause', handlePause)
+    audio.value.addEventListener('nextsong', handleNextSong)
+    audio.value.addEventListener('previoussong', handlePrevSong)
+  } else {
+    // Если режим PiP включен, удаляем все слушатели событий
+    audio.value.removeEventListener('play', handlePlay)
+    audio.value.removeEventListener('pause', handlePause)
+    audio.value.removeEventListener('nextsong', handleNextSong)
+    audio.value.removeEventListener('previoussong', handlePrevSong)
+  }
+}
+
+// Функции-обработчики событий
+const handlePlay = () => {
+  console.log('Кнопка воспроизведения была нажата')
+}
+
+const handlePause = () => {
+  console.log('Кнопка паузы была нажата')
+}
+
+const handleNextSong = () => {
+  console.log('Кнопка для следующей песни была нажата')
+}
+
+const handlePrevSong = () => {
+  console.log('Кнопка для предыдущей песни была нажата')
+}
+
+watch(
+  () => isPlaying.value,
+  () => {
+    if (document.pictureInPictureElement) {
+      console.log(isPlaying.value)
+      if (isPlaying.value) {
+        document.pictureInPictureElement.play()
+      } else {
+        document.pictureInPictureElement.pause()
+      }
+    }
+  }
+)
 </script>
 
 <template lang="">
+  <!-- <div class="fixed flex top-0 z-50 w-full h-40 text-black"> -->
+  <!-- <video ref="videoPlayer" controls :src="currentArtist.albumCover"></video> -->
+  <!-- <button class="w-full h-full bg-red-200">Test</button> -->
+  <!-- <button class="w-full h-full bg-blue-200">Test 2</button> -->
+  <!-- </div> -->
   <div
     id="MusicPlayer"
     v-if="audio"
@@ -143,7 +237,7 @@ watch(
         </div>
         <div
           ref="seekerContainer"
-          class="w-full rounded-full relative mt-2 mb-3"
+          class="w-full rounded-full cursor-pointer relative mt-2 mb-3"
           @mouseenter="isHover = true"
           @mouseleave="isHover = false"
         >
@@ -151,11 +245,11 @@ watch(
             v-model="range"
             ref="seeker"
             type="range"
-            class="absolute rounded-full my-2 w-full h-0 z-40 appearance-none bg-opacity-100 focus:outline-none accent-white"
+            class="cursor-pointer absolute rounded-full my-2 w-full h-0 z-40 appearance-none bg-opacity-100 focus:outline-none accent-white"
             :class="{ rangeDotHidden: !isHover }"
           />
           <div
-            class="pointer-events-none rounded-full mt-[6px] absolute h-[4px] z-10 inset-y-0 left-0 w-0"
+            class="pointer-events-none cursor-pointer rounded-full mt-[6px] absolute h-[4px] z-10 inset-y-0 left-0 w-0"
             :style="`width: ${range}%;`"
             :class="isHover ? 'bg-green-500' : 'bg-white'"
           />
@@ -170,7 +264,9 @@ watch(
     </div>
     <div class="flex items-center w-1/4 justify-end pr-10">
       <MusicPlayerVolume />
-      <PictureInPictureBottomRight class="ml-4" fillColor="#FFFFFF" :size="18" />
+      <div class="cursor-pointer ml-4" @click="togglePiPMode">
+        <PictureInPictureBottomRight class="" fillColor="#FFFFFF" :size="18" />
+      </div>
     </div>
   </div>
 </template>
