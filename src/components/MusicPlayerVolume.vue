@@ -12,7 +12,7 @@ const { audio, volume: AudioVolume } = storeToRefs(useSong)
 
 let isHover = ref(false)
 
-let vol = ref(40)
+let vol = ref(AudioVolume.value * 100)
 let volume = ref(null)
 let volBeforeMute = ref(80)
 onMounted(() => {

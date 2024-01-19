@@ -73,4 +73,74 @@ import HomeCard from '@/components/HomeCard.vue'
       />
     </div>
   </div>
+  <div class="p-8">
+    <button type="button" class="text-white text-2xl font-semibold hover:underline cursor-pointer">
+      You might like this
+    </button>
+
+    <div class="py-1.5"></div>
+
+    <div class="flex items-center flex-wrap">
+      <HomeCard
+        :image="`https://source.unsplash.com/random/300x300?sig=${Math.random()}`"
+        title="Digital Dreams"
+        subTitle="Virtual Realities"
+      />
+      <HomeCard
+        :image="`https://source.unsplash.com/random/300x300?sig=${Math.random()}`"
+        title="Whimsical Wonderland"
+        subTitle="Fantasy Adventure"
+      />
+      <HomeCard
+        :image="`https://source.unsplash.com/random/300x300?sig=${Math.random()}`"
+        title="Harmony in Chaos"
+        subTitle="Balancing Act"
+      />
+      <HomeCard
+        :image="`https://source.unsplash.com/random/300x300?sig=${Math.random()}`"
+        title="Ethereal Echoes"
+        subTitle="Memories Unfolding"
+      />
+      <HomeCard
+        :image="`https://source.unsplash.com/random/300x300?sig=${Math.random()}`"
+        title="Journey Beyond Stars"
+        subTitle="Cosmic Odyssey"
+      />
+    </div>
+  </div>
+  <div class="p-8">
+    <button type="button" class="text-white text-2xl font-semibold hover:underline cursor-pointer">
+      Can be cool
+    </button>
+
+    <div class="py-1.5"></div>
+
+    <div class="flex items-center flex-wrap">
+      <HomeCard
+        :image="`https://source.unsplash.com/random/300x300?sig=${Math.random()}`"
+        title="Digital Dreams"
+        subTitle="Virtual Realities"
+      />
+      <HomeCard
+        :image="`https://source.unsplash.com/random/300x300?sig=${Math.random()}`"
+        title="Whimsical Wonderland"
+        subTitle="Fantasy Adventure"
+      />
+      <HomeCard
+        :image="`https://source.unsplash.com/random/300x300?sig=${Math.random()}`"
+        title="Harmony in Chaos"
+        subTitle="Balancing Act"
+      />
+      <HomeCard
+        :image="`https://source.unsplash.com/random/300x300?sig=${Math.random()}`"
+        title="Ethereal Echoes"
+        subTitle="Memories Unfolding"
+      />
+      <HomeCard
+        :image="`https://source.unsplash.com/random/300x300?sig=${Math.random()}`"
+        title="Journey Beyond Stars"
+        subTitle="Cosmic Odyssey"
+      />
+    </div>
+  </div>
 </template>

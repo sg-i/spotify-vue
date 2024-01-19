@@ -25,12 +25,12 @@ const playFunc = () => {
 <template>
   <div class="p-8 overflow-x-hidden">
     <button type="button" class="text-white text-2xl font-semibold hover:underline cursor-pointer">
-      Browse all
+      Album
     </button>
 
     <div class="py-1.5"></div>
 
-    <div class="flex items-center w-full relative h-full">
+    <div class="flex items-center w-full relative">
       <div class="max-w-[140px] min-w-[140px] h-[140px] overflow-hidden">
         <img class="w-full h-full object-cover" :src="artist.albumCover" alt="" />
       </div>

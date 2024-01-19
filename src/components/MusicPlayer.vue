@@ -73,24 +73,28 @@ onMounted(() => {
 
 const timeupdate = () => {
   console.log('timeupdate')
-  audio.value.addEventListener('timeupdate', function () {
-    const minutes = Math.floor(audio.value.currentTime / 60)
-    const seconds = Math.floor(audio.value.currentTime - minutes * 60)
-    isTrackTimeCurrent.value = minutes + ':' + seconds.toString().padStart(2, '0')
-    const value = (100 / audio.value.duration) * audio.value.currentTime
-    range.value = value
-    seeker.value.value = value
-  })
+  if (audio.value.currentSrc !== undefined) {
+    audio.value.addEventListener('timeupdate', function () {
+      const minutes = Math.floor(audio.value.currentTime / 60)
+      const seconds = Math.floor(audio.value.currentTime - minutes * 60)
+      isTrackTimeCurrent.value = minutes + ':' + seconds.toString().padStart(2, '0')
+      const value = (100 / audio.value.duration) * audio.value.currentTime
+      range.value = value
+      seeker.value.value = value
+    })
+  }
 }
 const loadedmetadata = () => {
   console.log('loadedmetadata')
-  audio.value.addEventListener('loadedmetadata', function () {
-    const duration = audio.value.duration
-    const minutes = Math.floor(duration / 60)
-    const seconds = Math.floor(duration % 60)
-    console.log('meta')
-    isTrackTimeTotal.value = minutes + ':' + seconds.toString().padStart(2, '0')
-  })
+  if (audio.value.currentSrc !== undefined) {
+    audio.value.addEventListener('loadedmetadata', function () {
+      const duration = audio.value.duration
+      const minutes = Math.floor(duration / 60)
+      const seconds = Math.floor(duration % 60)
+      console.log('meta')
+      isTrackTimeTotal.value = minutes + ':' + seconds.toString().padStart(2, '0')
+    })
+  }
 }
 
 watch(
@@ -189,7 +193,7 @@ watch(
   <div
     id="MusicPlayer"
     v-if="audio"
-    class="fixed flex items-center justify-between bottom-0 w-full z-50 h-[90px] bg-[#181818] border-t border-t-[#272727]"
+    class="flex items-center justify-between bottom-0 w-full z-50 h-[90px] bg-[#181818] border-t border-t-[#272727]"
   >
     <div class="flex items-center w-1/4">
       <div class="flex items-center ml-4">
@@ -203,7 +207,7 @@ watch(
             {{ currentTrack.name }}
           </div>
           <div
-            class="text-[11px] text-nowrap overflow-hidden text-gray-500 hover:underline hover:text-white cursor-pointer"
+            class="text-[11px] text-nowrap overflow-hidden text-zinc-400 hover:underline hover:text-white cursor-pointer"
           >
             {{ currentArtist.name }}
           </div>
