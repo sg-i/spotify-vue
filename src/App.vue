@@ -12,8 +12,8 @@ import ChevronLeft from 'vue-material-design-icons/ChevronLeft.vue'
 import { useSongStore } from '@/stores/song'
 import { storeToRefs } from 'pinia'
 
-import artist from '@/artist.json'
-
+// import artist from '@/artist.json'
+import router from './router'
 const useSong = useSongStore()
 const { isPlaying, currentTrack } = storeToRefs(useSong)
 
@@ -23,7 +23,6 @@ onMounted(() => {
   useSong.loadDefaultSong()
   isPlaying.value = false
 })
-
 let openMenu = ref(false)
 </script>
 
@@ -33,10 +32,18 @@ let openMenu = ref(false)
       class="w-[calc(100%-240px)] h-[60px] fixed right-0 z-20 bg-[#101010] bg-opacity-80 flex items-center justify-between"
     >
       <div class="flex items-center ml-6">
-        <button type="button" class="rounded-full bg-black p-[1px] cursor-pointer">
+        <button
+          type="button"
+          @click="router.go(-1)"
+          class="rounded-full bg-black p-[1px] cursor-pointer"
+        >
           <ChevronLeft fillColor="#FFFFFF" :size="30" />
         </button>
-        <button type="button" class="rounded-full ml-4 bg-black p-[1px] cursor-pointer">
+        <button
+          type="button"
+          @click="router.go(1)"
+          class="rounded-full ml-4 bg-black p-[1px] cursor-pointer"
+        >
           <ChevronRight fillColor="#FFFFFF" :size="30" />
         </button>
       </div>
