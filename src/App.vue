@@ -20,7 +20,7 @@ const { isPlaying, currentTrack } = storeToRefs(useSong)
 onMounted(() => {
   // isPlaying.value = true
   // useSong.loadSong(artist, artist.tracks[0])
-  useSong.loadDefaultSong()
+  // useSong.loadDefaultSong()
   isPlaying.value = false
 })
 let openMenu = ref(false)
@@ -63,13 +63,15 @@ let openMenu = ref(false)
             iconString="playlist"
             pageUrl="/playlist"
           />
-          <MenuItem
-            class="-ml-[1px]"
-            :iconSize="27"
-            name="Liked Songs"
-            iconString="liked"
-            pageUrl="/liked"
-          />
+          <RouterLink to="/liked">
+            <MenuItem
+              class="-ml-[1px]"
+              :iconSize="27"
+              name="Liked Songs"
+              iconString="liked"
+              pageUrl="/liked"
+            />
+          </RouterLink>
         </ul>
         <div class="border-t mt-2 border-t-[#2A2A2A]">
           <ul>

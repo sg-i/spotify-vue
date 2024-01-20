@@ -31,8 +31,6 @@ export const useAudioPictureInPicture = (
   canvas.width = canvas.height = 512 // default canvas height
   const video = document.createElement('video') // create a new video element that would hold the canvas on pip mode
 
-  console.log(video)
-  console.log(canvas)
   video.muted = true
 
   /**
@@ -66,12 +64,13 @@ export const useAudioPictureInPicture = (
   const updatePip = async (image) => {
     if (document.pictureInPictureElement) document.exitPictureInPicture() // close previous one if set to avoid update glitch
     thumb = image
-    // eslint-disable-next-line no-undef
     const thumbnail = new Image() // thumbnail creation
     thumbnail.crossOrigin = true
     thumbnail.src = thumb
     await thumbnail.decode()
-    canvas.getContext('2d').drawImage(thumbnail, 0, 0, 512, 512) // draw the image as the background of the canvas
+    const aspectRatio = thumbnail.width / thumbnail.height
+
+    canvas.getContext('2d').drawImage(thumbnail, -200, 0, 512 * aspectRatio, 512) // draw the image as the background of the canvas
     await video.play()
     await video.requestPictureInPicture()
   }

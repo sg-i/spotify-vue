@@ -6,8 +6,16 @@ export const useSongStore = defineStore('song', {
     audio: null,
     currentArtist: null,
     currentTrack: null,
-    volume: 0.4
+    volume: 0.4,
+    likedSongs: [
+      {
+        id: 2,
+        name: 'Lost and Found',
+        path: '/songs/LostAndFound.mp3'
+      }
+    ]
   }),
+
   actions: {
     loadSong(artist, track) {
       this.currentArtist = artist
@@ -29,11 +37,18 @@ export const useSongStore = defineStore('song', {
     },
     loadDefaultSong() {
       const track = artist.tracks[1]
+      // this.loadSong(artist, track)
+
       this.currentArtist = artist
       this.currentTrack = track
 
       this.audio = new Audio()
       this.audio.src = track.path
+      this.audio.id = 'MusicPlayerAudioID'
+    },
+    loadLastStorageSong() {
+      this.audio = new Audio()
+      this.audio.src = this.currentTrack.path
       this.audio.id = 'MusicPlayerAudioID'
     },
     playOrPauseSong() {
@@ -84,9 +99,22 @@ export const useSongStore = defineStore('song', {
       this.audio = null
       this.currentArtist = null
       this.currentTrack = null
+    },
+    addLikedSong(track) {
+      this.likedSongs.push(track)
+    },
+    removeLikedSong(track) {
+      this.likedSongs = this.likedSongs.filter((el) => el.id != track.id)
     }
   },
   persist: {
+    afterRestore: (ctx) => {
+      if (ctx.store.currentTrack === null) {
+        ctx.store.loadDefaultSong()
+      } else {
+        ctx.store.loadLastStorageSong()
+      }
+    },
     debug: true
   }
 })

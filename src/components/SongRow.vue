@@ -1,5 +1,5 @@
 <script setup>
-import { ref, toRefs, onMounted } from 'vue'
+import { ref, toRefs, onMounted, toRaw } from 'vue'
 import Heart from 'vue-material-design-icons/Heart.vue'
 import Play from 'vue-material-design-icons/Play.vue'
 import Pause from 'vue-material-design-icons/Pause.vue'
@@ -8,7 +8,7 @@ import { useSongStore } from '@/stores/song'
 import { storeToRefs } from 'pinia'
 
 const useSong = useSongStore()
-const { isPlaying, currentTrack } = storeToRefs(useSong)
+const { isPlaying, currentTrack, likedSongs } = storeToRefs(useSong)
 
 let isHover = ref(false)
 
@@ -19,8 +19,9 @@ const props = defineProps({
   artist: Object,
   index: Number
 })
-const { track } = toRefs(props)
-
+const { index, track } = toRefs(props)
+let rawLikedSong = ref(toRaw(likedSongs.value))
+let isLiked = ref(rawLikedSong.value.some((song) => song.id == track.value.id))
 onMounted(() => {
   const audio = new Audio(track.value.path)
   audio.addEventListener('loadedmetadata', function () {
@@ -30,6 +31,17 @@ onMounted(() => {
     isTrackTime.value = minutes + ':' + seconds.toString().padStart(2, '0')
   })
 })
+
+const addLikedSong = () => {
+  useSong.addLikedSong(track.value)
+  isLiked.value = true
+  console.log('like')
+}
+const removeLikedSong = () => {
+  useSong.removeLikedSong(track.value)
+  isLiked.value = false
+  console.log('dislike')
+}
 </script>
 <template>
   <li
@@ -66,8 +78,9 @@ onMounted(() => {
       </div>
     </div>
     <div class="flex items-center">
-      <button type="button" v-if="isHover">
-        <Heart fillColor="#1BD760" :size="22" />
+      <!-- <button type="button" v-if="isHover"> -->
+      <button @click="isLiked ? removeLikedSong() : addLikedSong()" type="button" v-if="true">
+        <Heart :class="isLiked ? 'text-green-500' : 'text-zinc-400'" :size="22" />
       </button>
       <div v-if="isTrackTime" class="text-xs mx-5 text-gray-400">
         {{ isTrackTime }}

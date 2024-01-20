@@ -7,14 +7,16 @@ import Heart from 'vue-material-design-icons/Heart.vue'
 import ClockTimeThreeOutline from 'vue-material-design-icons/ClockTimeThreeOutline.vue'
 import artist from '@/artist.json'
 
-import { onMounted } from 'vue'
 import { useSongStore } from '@/stores/song'
 import { storeToRefs } from 'pinia'
+import { onMounted } from 'vue'
 
 const useSong = useSongStore()
-const { isPlaying, currentTrack, currentArtist } = storeToRefs(useSong)
+const { isPlaying, currentTrack, currentArtist, likedSongs } = storeToRefs(useSong)
 
-onMounted(() => {})
+onMounted(() => {
+  //   console.log((currentArtist.value.tracks = likedSongs.value))
+})
 
 const playFunc = () => {
   if (currentTrack.value) {
@@ -27,41 +29,37 @@ const playFunc = () => {
 
 <template>
   <div class="p-8 overflow-x-hidden">
-    <button type="button" class="text-white text-2xl font-semibold hover:underline cursor-pointer">
-      Album
-    </button>
-
     <div class="py-1.5"></div>
 
     <div class="flex items-center w-full relative">
       <div class="max-w-[140px] min-w-[140px] h-[140px] overflow-hidden">
-        <img class="w-full h-full object-cover" :src="artist.albumCover" alt="" />
+        <img class="w-full h-full object-cover" src="/images/icons/liked-songs-640.png" alt="" />
       </div>
       <div class="w-full ml-5">
         <div
           class="text-[29px] text-white absolute w-full hover:underline cursor-pointer top-0 font-bosemiboldld"
         >
-          {{ artist.name }}
+          Liked Songs
         </div>
         <div class="text-gray-300 text-[13px] flex">
-          <div class="flex">Album</div>
-          <div class="ml-2 flex items-center gap-2">
+          <div class="flex items-center gap-2">
+            <div class="flex items-center">
+              <img
+                class="rounded-full mb-[-2px]"
+                width="20"
+                src="https://avatars.githubusercontent.com/u/74151439?v=4"
+              />
+              <div class="text-white text-[14px] ml-1.5 font-semibold">sg-i</div>
+            </div>
             <span>•</span>
-            <span>{{ artist.releaseYear }}</span>
-            <span>•</span>
-            <span>{{ artist.tracks.length }} songs</span>
+
+            <span>{{ likedSongs.length }} {{ likedSongs.length == 1 ? 'song' : 'songs' }}</span>
           </div>
         </div>
         <div class="absolute flex gap-4 items-center justify-start bottom-0 mb-1.5">
           <button class="p-1 rounded-full bg-white" @click="playFunc()">
-            <Play v-if="!isPlaying" fillColor="#181818" :size="25" />
-            <Pause v-else fillColor="#181818" :size="25" />
-          </button>
-          <button type="button">
-            <Heart fillColor="#1BD760" :size="30" />
-          </button>
-          <button type="button">
-            <DotsHorizontal fillColor="#FFFFFF" :size="25" />
+            <Play v-if="!isPlaying" fillColor="#181818" :size="23" />
+            <Pause v-else fillColor="#181818" :size="23" />
           </button>
         </div>
       </div>
@@ -76,7 +74,7 @@ const playFunc = () => {
     </div>
     <div class="border-b border-b-[#2A2A2A] mt-2"></div>
     <div class="mb-4"></div>
-    <ul class="w-full" v-for="(track, index) in artist.tracks" :key="track">
+    <ul class="w-full" v-for="(track, index) in likedSongs" :key="track">
       <SongRow :artist="artist" :track="track" :index="++index" />
     </ul>
   </div>

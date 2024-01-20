@@ -72,7 +72,6 @@ onMounted(() => {
 })
 
 const timeupdate = () => {
-  console.log('timeupdate')
   if (audio.value.currentSrc !== undefined) {
     audio.value.addEventListener('timeupdate', function () {
       const minutes = Math.floor(audio.value.currentTime / 60)
@@ -85,13 +84,11 @@ const timeupdate = () => {
   }
 }
 const loadedmetadata = () => {
-  console.log('loadedmetadata')
   if (audio.value.currentSrc !== undefined) {
     audio.value.addEventListener('loadedmetadata', function () {
       const duration = audio.value.duration
       const minutes = Math.floor(duration / 60)
       const seconds = Math.floor(duration % 60)
-      console.log('meta')
       isTrackTimeTotal.value = minutes + ':' + seconds.toString().padStart(2, '0')
     })
   }
@@ -137,19 +134,6 @@ const { isPipToggled, togglePip } = useAudioPictureInPicture(
 
 const togglePiPMode = () => {
   togglePip()
-  if (!isPipToggled.value) {
-    // Если режим PiP не включен, добавляем слушатели событий
-    audio.value.addEventListener('play', handlePlay)
-    audio.value.addEventListener('pause', handlePause)
-    audio.value.addEventListener('nextsong', handleNextSong)
-    audio.value.addEventListener('previoussong', handlePrevSong)
-  } else {
-    // Если режим PiP включен, удаляем все слушатели событий
-    audio.value.removeEventListener('play', handlePlay)
-    audio.value.removeEventListener('pause', handlePause)
-    audio.value.removeEventListener('nextsong', handleNextSong)
-    audio.value.removeEventListener('previoussong', handlePrevSong)
-  }
 }
 
 // Функции-обработчики событий
@@ -173,12 +157,37 @@ watch(
   () => isPlaying.value,
   () => {
     if (document.pictureInPictureElement) {
-      console.log(isPlaying.value)
       if (isPlaying.value) {
         document.pictureInPictureElement.play()
       } else {
         document.pictureInPictureElement.pause()
       }
+    }
+  }
+)
+watch(
+  () => isPipToggled.value,
+  () => {
+    console.log(!isPipToggled.value)
+    if (document.pictureInPictureElement) {
+      if (isPlaying.value) {
+        document.pictureInPictureElement.play()
+      } else {
+        document.pictureInPictureElement.pause()
+      }
+    }
+    if (!isPipToggled.value) {
+      // Если режим PiP не включен, добавляем слушатели событий
+      audio.value.addEventListener('play', handlePlay)
+      audio.value.addEventListener('pause', handlePause)
+      audio.value.addEventListener('nextsong', handleNextSong)
+      audio.value.addEventListener('previoussong', handlePrevSong)
+    } else {
+      // Если режим PiP включен, удаляем все слушатели событий
+      audio.value.removeEventListener('play', handlePlay)
+      audio.value.removeEventListener('pause', handlePause)
+      audio.value.removeEventListener('nextsong', handleNextSong)
+      audio.value.removeEventListener('previoussong', handlePrevSong)
     }
   }
 )
