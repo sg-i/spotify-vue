@@ -28,20 +28,22 @@ const playFunc = () => {
 </script>
 
 <template>
-  <div class="p-8 overflow-x-hidden">
+  <div class="p-4 sm:p-8 overflow-x-hidden">
     <div class="py-1.5"></div>
 
-    <div class="flex items-center w-full relative">
-      <div class="max-w-[140px] min-w-[140px] h-[140px] overflow-hidden">
+    <div class="flex items-center w-full">
+      <div
+        class="max-w-[110px] min-w-[110px] sm:max-w-[140px] sm:min-w-[140px] h-[110px] sm:h-[140px] overflow-hidden"
+      >
         <img class="w-full h-full object-cover" src="/images/icons/liked-songs-640.png" alt="" />
       </div>
       <div class="w-full ml-5">
         <div
-          class="text-[29px] text-white absolute w-full hover:underline cursor-pointer top-0 font-bosemiboldld"
+          class="text-[19px] sm:text-[29px] text-white w-full hover:underline cursor-pointer font-bosemiboldld"
         >
           Liked Songs
         </div>
-        <div class="text-gray-300 text-[13px] flex">
+        <div class="text-gray-300 py-3 text-[13px] flex">
           <div class="flex items-center gap-2">
             <div class="flex items-center">
               <img
@@ -56,7 +58,7 @@ const playFunc = () => {
             <span>{{ likedSongs.length }} {{ likedSongs.length == 1 ? 'song' : 'songs' }}</span>
           </div>
         </div>
-        <div class="absolute flex gap-4 items-center justify-start bottom-0 mb-1.5">
+        <div class="flex gap-4 items-center justify-start mb-1.5">
           <button class="p-1 rounded-full bg-white" @click="playFunc()">
             <Play v-if="!isPlaying" fillColor="#181818" :size="23" />
             <Pause v-else fillColor="#181818" :size="23" />

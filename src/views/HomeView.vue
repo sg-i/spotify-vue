@@ -3,14 +3,14 @@ import HomeCard from '@/components/HomeCard.vue'
 </script>
 
 <template>
-  <div class="p-8">
+  <div class="p-5 sm:p-8">
     <button type="button" class="text-white text-2xl font-semibold hover:underline cursor-pointer">
       Podcasts of the Week
     </button>
 
     <div class="py-1.5"></div>
 
-    <div class="flex items-center flex-wrap">
+    <div class="grid xl:grid-cols-5 lg:grid-cols-4 md:grid-cols-3 grid-cols-2 gap-6">
       <HomeCard
         :image="`https://source.unsplash.com/random/300x300?sig=${Math.random()}`"
         title="Serene Sunset"
@@ -38,14 +38,14 @@ import HomeCard from '@/components/HomeCard.vue'
       />
     </div>
   </div>
-  <div class="p-8">
+  <div class="p-5 sm:p-8">
     <button type="button" class="text-white text-2xl font-semibold hover:underline cursor-pointer">
       Recommended Radio
     </button>
 
     <div class="py-1.5"></div>
 
-    <div class="flex items-center flex-wrap">
+    <div class="grid xl:grid-cols-5 lg:grid-cols-4 md:grid-cols-3 grid-cols-2 gap-6">
       <HomeCard
         :image="`https://source.unsplash.com/random/300x300?sig=${Math.random()}`"
         title="Digital Dreams"
@@ -73,14 +73,14 @@ import HomeCard from '@/components/HomeCard.vue'
       />
     </div>
   </div>
-  <div class="p-8">
+  <div class="p-5 sm:p-8">
     <button type="button" class="text-white text-2xl font-semibold hover:underline cursor-pointer">
       You might like this
     </button>
 
     <div class="py-1.5"></div>
 
-    <div class="flex items-center flex-wrap">
+    <div class="grid xl:grid-cols-5 lg:grid-cols-4 md:grid-cols-3 grid-cols-2 gap-6">
       <HomeCard
         :image="`https://source.unsplash.com/random/300x300?sig=${Math.random()}`"
         title="Digital Dreams"
@@ -108,14 +108,14 @@ import HomeCard from '@/components/HomeCard.vue'
       />
     </div>
   </div>
-  <div class="p-8">
+  <div class="p-5 sm:p-8">
     <button type="button" class="text-white text-2xl font-semibold hover:underline cursor-pointer">
       Can be cool
     </button>
 
     <div class="py-1.5"></div>
 
-    <div class="flex items-center flex-wrap">
+    <div class="grid xl:grid-cols-5 lg:grid-cols-4 md:grid-cols-3 grid-cols-2 gap-6">
       <HomeCard
         :image="`https://source.unsplash.com/random/300x300?sig=${Math.random()}`"
         title="Digital Dreams"

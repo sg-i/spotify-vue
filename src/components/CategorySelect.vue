@@ -21,7 +21,7 @@ const isImageLoaded = ref(false)
       :style="`background-color: ${randColor.color};`"
       class="max-w-[253px] group contrast-[2] brightness-[0.87] rounded-xl aspect-square relative overflow-hidden"
     >
-      <div class="text-white pt-3 pl-4 font-semibold text-[23px]">
+      <div class="text-white pt-3 pl-4 font-semibold text-[20px] sm:text-[23px]">
         {{ category }}
       </div>
       <img

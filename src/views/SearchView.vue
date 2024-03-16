@@ -10,7 +10,7 @@ import CategorySelect from '@/components/CategorySelect.vue'
 
     <div class="py-1.5"></div>
 
-    <div class="grid xl:grid-cols-5 lg:grid-cols-4 md:grid-cols-3 sm:grid-cols-2 gap-6">
+    <div class="grid xl:grid-cols-5 lg:grid-cols-4 md:grid-cols-3 grid-cols-2 gap-6">
       <CategorySelect
         category="Podcasts"
         :image="`https://source.unsplash.com/random/300x300?sig=${Math.random()}`"

@@ -3,6 +3,7 @@ import { ref, onMounted } from 'vue'
 import { RouterLink, RouterView } from 'vue-router'
 import MenuItem from './components/MenuItem.vue'
 import MusicPlayer from './components/MusicPlayer.vue'
+import BurgerMenu from './components/BurgerMenu.vue'
 
 import ChevronUp from 'vue-material-design-icons/ChevronUp.vue'
 import ChevronDown from 'vue-material-design-icons/ChevronDown.vue'
@@ -29,7 +30,7 @@ let openMenu = ref(false)
 <template>
   <div class="flex flex-col h-[100vh] justify-between">
     <div class="flex h-full overflow-hidden">
-      <div id="SideNav" class="h-full p-6 w-[240px] z-50 bg-black">
+      <div id="SideNav" class="h-full p-6 w-[240px] z-50 bg-black hidden sm:block">
         <RouterLink to="/">
           <img width="125" src="/images/icons/spotify-logo.png" />
         </RouterLink>
@@ -116,7 +117,7 @@ let openMenu = ref(false)
           <button
             @click="openMenu = !openMenu"
             :class="openMenu ? 'bg-[#282828]' : 'bg-black'"
-            class="bg-black hover:bg-[#282828] rounded-full p-1 mr-8 mt-0.5 cursor-pointer"
+            class="bg-black hidden sm:block hover:bg-[#282828] rounded-full p-1 mr-8 mt-0.5 cursor-pointer"
           >
             <div class="flex items-center">
               <img
@@ -142,7 +143,7 @@ let openMenu = ref(false)
               />
             </div>
           </button>
-
+          <BurgerMenu />
           <span
             v-if="openMenu"
             class="fixed w-[190px] bg-[#282828] shadow-2xl z-50 rounded-sm top-[52px] right-[35px] p-1 cursor-pointer"
