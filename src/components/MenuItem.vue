@@ -7,9 +7,13 @@ const props = defineProps({
   iconString: String,
   iconSize: Number,
   pageUrl: String,
-  name: String
+  name: String,
+  fontSize: {
+    type: Number,
+    default: 13
+  }
 })
-const { iconString, iconSize, pageUrl, name } = toRefs(props)
+const { iconString, iconSize, pageUrl, name, fontSize } = toRefs(props)
 
 let icon = ref(null)
 let textIsHover = ref(false)
@@ -39,22 +43,18 @@ const isHover = () => {
 
 <template>
   <li
+    @click="console.log(fontSize)"
     class="flex h-11 items-center justify-start cursor-pointer"
     @mouseenter="isHover()"
     @mouseleave="isHover()"
   >
-    <div :class="`overflow-hidden `">
+    <div :class="`overflow-hidden rounded-sm`">
       <img :width="iconSize" :src="`/images/icons/${icon}.png`" />
     </div>
-    <div
-      :class="textIsHover ? 'text-white ' : 'text-gray-400'"
-      class="font-semibold text-[14px] ml-4 mt-0.5"
-    >
+    <div :class="textIsHover ? 'text-white ' : 'text-gray-400'" class="font-semibold ml-4 mt-0.5">
       <span :class="route.path == pageUrl ? 'text-white' : ''">
         {{ name }}
       </span>
     </div>
   </li>
 </template>
-
-<style lang="scss" scoped></style>

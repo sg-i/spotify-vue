@@ -202,31 +202,38 @@ watch(
   <div
     id="MusicPlayer"
     v-if="audio"
-    class="flex items-center justify-between bottom-0 w-full z-50 h-[90px] bg-[#181818] border-t border-t-[#272727]"
+    class="flex items-center justify-between bottom-0 w-full z-50 h-[100px] sm:h-[90px] bg-[#181818] border-t border-t-[#272727]"
   >
-    <div class="flex items-center w-1/4">
-      <div class="flex items-center ml-4">
-        <div class="max-w-[55px] min-w-[55px] h-[55px] rounded-sm shadow-2xl overflow-hidden">
-          <img class="w-full h-full object-cover" :src="currentArtist.albumCover" />
-        </div>
-        <div class="ml-4">
+    <div class="max-w-[35%] flex items-center w-2/6 sm:w-1/4">
+      <div class="flex itemc-left sm:items-center flex-col sm:flex-row ml-2 sm:ml-4">
+        <div class="flex">
           <div
-            class="text-[14px] text-nowrap overflow-hidden text-white hover:underline cursor-pointer"
+            class="max-w-[35px] min-w-[35px] h-[35px] sm:max-w-[55px] sm:min-w-[55px] sm:h-[55px] rounded-sm shadow-2xl overflow-hidden"
+          >
+            <img class="w-full h-full object-cover" :src="currentArtist.albumCover" />
+          </div>
+          <div class="flex sm:hidden items-center ml-2 sm:ml-8">
+            <Heart fillColor="#1BD760" :size="20" />
+          </div>
+        </div>
+        <div class="sm:ml-4">
+          <div
+            class="text-[12px] max-w-[90%] sm:max-w-[100%] sm:text-[14px] text-nowrap overflow-hidden text-white hover:underline cursor-pointer"
           >
             {{ currentTrack.name }}
           </div>
           <div
-            class="text-[11px] text-nowrap overflow-hidden text-zinc-400 hover:underline hover:text-white cursor-pointer"
+            class="text-[10px] sm:text-[11px] text-nowrap overflow-hidden text-zinc-400 hover:underline hover:text-white cursor-pointer"
           >
             {{ currentArtist.name }}
           </div>
         </div>
       </div>
-      <div class="flex items-center ml-8">
+      <div class="hidden sm:flex items-center ml-2 sm:ml-8">
         <Heart fillColor="#1BD760" :size="20" />
       </div>
     </div>
-    <div class="max-w-[35%] mx-auto w-2/4">
+    <div class="sm:max-w-[45%] mx-auto w-3/6 sm:w-2/4">
       <div class="flex-col items-center justify-center">
         <div class="buttons flex items-center justify-center h-[30px]">
           <div class="flex justify-between w-[150px]">
@@ -297,9 +304,11 @@ watch(
         </div>
       </div>
     </div>
-    <div class="flex items-center w-1/4 justify-end pr-10">
+    <div
+      class="max-w-[26%] sm:max-w-[35%] flex items-center w-2/6 sm:w-1/4 justify-end pr-3 sm:pr-10"
+    >
       <MusicPlayerVolume />
-      <div class="cursor-pointer ml-4" @click="togglePiPMode">
+      <div class="hidden sm:block cursor-pointer ml-4" @click="togglePiPMode">
         <PictureInPictureBottomRight
           :class="isPipToggled ? 'text-green-500' : 'text-zinc-300 hover:text-white'"
           :size="18"

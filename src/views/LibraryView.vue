@@ -26,24 +26,24 @@ const playFunc = () => {
 </script>
 
 <template>
-  <div class="p-8 overflow-x-hidden">
+  <div class="p-4 sm:p-8 overflow-x-hidden">
     <button type="button" class="text-white text-2xl font-semibold hover:underline cursor-pointer">
       Album
     </button>
 
     <div class="py-1.5"></div>
 
-    <div class="flex items-center w-full relative">
-      <div class="max-w-[140px] min-w-[140px] h-[140px] overflow-hidden">
+    <div class="flex items-center w-full">
+      <div
+        class="max-w-[100px] min-w-[100px] h-[100px] sm:max-w-[140px] sm:min-w-[140px] sm:h-[140px] overflow-hidden"
+      >
         <img class="w-full h-full object-cover" :src="artist.albumCover" alt="" />
       </div>
       <div class="w-full ml-5">
-        <div
-          class="text-[29px] text-white absolute w-full hover:underline cursor-pointer top-0 font-bosemiboldld"
-        >
+        <div class="text-[29px] text-white w-full hover:underline cursor-pointer font-bosemiboldld">
           {{ artist.name }}
         </div>
-        <div class="text-gray-300 text-[13px] flex">
+        <div class="text-gray-300 mb-2 text-[13px] flex">
           <div class="flex">Album</div>
           <div class="ml-2 flex items-center gap-2">
             <span>•</span>
@@ -52,7 +52,7 @@ const playFunc = () => {
             <span>{{ artist.tracks.length }} songs</span>
           </div>
         </div>
-        <div class="absolute flex gap-4 items-center justify-start bottom-0 mb-1.5">
+        <div class="flex gap-4 items-center justify-start mb-1.5">
           <button class="p-1 rounded-full bg-white" @click="playFunc()">
             <Play v-if="!isPlaying" fillColor="#181818" :size="25" />
             <Pause v-else fillColor="#181818" :size="25" />
