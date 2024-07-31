@@ -1,5 +1,6 @@
 <script setup>
 import HomeCard from '@/components/HomeCard.vue'
+const randomImageLink = `https://picsum.photos/300/300?random=`
 </script>
 
 <template>
@@ -12,27 +13,27 @@ import HomeCard from '@/components/HomeCard.vue'
 
     <div class="grid xl:grid-cols-5 lg:grid-cols-4 md:grid-cols-3 grid-cols-2 gap-6">
       <HomeCard
-        :image="`https://source.unsplash.com/random/300x300?sig=${Math.random()}`"
+        :image="`${randomImageLink}+${Math.random()}`"
         title="Serene Sunset"
         subTitle="Nature's Beauty"
       />
       <HomeCard
-        :image="`https://source.unsplash.com/random/300x300?sig=${Math.random()}`"
+        :image="`${randomImageLink}+${Math.random()}`"
         title="Tech Innovations"
         subTitle="Shaping Tomorrow"
       />
       <HomeCard
-        :image="`https://source.unsplash.com/random/300x300?sig=${Math.random()}`"
+        :image="`${randomImageLink}+${Math.random()}`"
         title="Urban Explorations"
         subTitle="City Vibes"
       />
       <HomeCard
-        :image="`https://source.unsplash.com/random/300x300?sig=${Math.random()}`"
+        :image="`${randomImageLink}+${Math.random()}`"
         title="Whispers of Wisdom"
         subTitle="Timeless Tales"
       />
       <HomeCard
-        :image="`https://source.unsplash.com/random/300x300?sig=${Math.random()}`"
+        :image="`${randomImageLink}+${Math.random()}`"
         title="Mystic Moonlight"
         subTitle="Night's Embrace"
       />
@@ -47,27 +48,27 @@ import HomeCard from '@/components/HomeCard.vue'
 
     <div class="grid xl:grid-cols-5 lg:grid-cols-4 md:grid-cols-3 grid-cols-2 gap-6">
       <HomeCard
-        :image="`https://source.unsplash.com/random/300x300?sig=${Math.random()}`"
+        :image="`${randomImageLink}+${Math.random()}`"
         title="Digital Dreams"
         subTitle="Virtual Realities"
       />
       <HomeCard
-        :image="`https://source.unsplash.com/random/300x300?sig=${Math.random()}`"
+        :image="`${randomImageLink}+${Math.random()}`"
         title="Whimsical Wonderland"
         subTitle="Fantasy Adventure"
       />
       <HomeCard
-        :image="`https://source.unsplash.com/random/300x300?sig=${Math.random()}`"
+        :image="`${randomImageLink}+${Math.random()}`"
         title="Harmony in Chaos"
         subTitle="Balancing Act"
       />
       <HomeCard
-        :image="`https://source.unsplash.com/random/300x300?sig=${Math.random()}`"
+        :image="`${randomImageLink}+${Math.random()}`"
         title="Ethereal Echoes"
         subTitle="Memories Unfolding"
       />
       <HomeCard
-        :image="`https://source.unsplash.com/random/300x300?sig=${Math.random()}`"
+        :image="`${randomImageLink}+${Math.random()}`"
         title="Journey Beyond Stars"
         subTitle="Cosmic Odyssey"
       />
@@ -82,27 +83,27 @@ import HomeCard from '@/components/HomeCard.vue'
 
     <div class="grid xl:grid-cols-5 lg:grid-cols-4 md:grid-cols-3 grid-cols-2 gap-6">
       <HomeCard
-        :image="`https://source.unsplash.com/random/300x300?sig=${Math.random()}`"
+        :image="`${randomImageLink}+${Math.random()}`"
         title="Digital Dreams"
         subTitle="Virtual Realities"
       />
       <HomeCard
-        :image="`https://source.unsplash.com/random/300x300?sig=${Math.random()}`"
+        :image="`${randomImageLink}+${Math.random()}`"
         title="Whimsical Wonderland"
         subTitle="Fantasy Adventure"
       />
       <HomeCard
-        :image="`https://source.unsplash.com/random/300x300?sig=${Math.random()}`"
+        :image="`${randomImageLink}+${Math.random()}`"
         title="Harmony in Chaos"
         subTitle="Balancing Act"
       />
       <HomeCard
-        :image="`https://source.unsplash.com/random/300x300?sig=${Math.random()}`"
+        :image="`${randomImageLink}+${Math.random()}`"
         title="Ethereal Echoes"
         subTitle="Memories Unfolding"
       />
       <HomeCard
-        :image="`https://source.unsplash.com/random/300x300?sig=${Math.random()}`"
+        :image="`${randomImageLink}+${Math.random()}`"
         title="Journey Beyond Stars"
         subTitle="Cosmic Odyssey"
       />
@@ -117,27 +118,27 @@ import HomeCard from '@/components/HomeCard.vue'
 
     <div class="grid xl:grid-cols-5 lg:grid-cols-4 md:grid-cols-3 grid-cols-2 gap-6">
       <HomeCard
-        :image="`https://source.unsplash.com/random/300x300?sig=${Math.random()}`"
+        :image="`${randomImageLink}+${Math.random()}`"
         title="Digital Dreams"
         subTitle="Virtual Realities"
       />
       <HomeCard
-        :image="`https://source.unsplash.com/random/300x300?sig=${Math.random()}`"
+        :image="`${randomImageLink}+${Math.random()}`"
         title="Whimsical Wonderland"
         subTitle="Fantasy Adventure"
       />
       <HomeCard
-        :image="`https://source.unsplash.com/random/300x300?sig=${Math.random()}`"
+        :image="`${randomImageLink}+${Math.random()}`"
         title="Harmony in Chaos"
         subTitle="Balancing Act"
       />
       <HomeCard
-        :image="`https://source.unsplash.com/random/300x300?sig=${Math.random()}`"
+        :image="`${randomImageLink}+${Math.random()}`"
         title="Ethereal Echoes"
         subTitle="Memories Unfolding"
       />
       <HomeCard
-        :image="`https://source.unsplash.com/random/300x300?sig=${Math.random()}`"
+        :image="`${randomImageLink}+${Math.random()}`"
         title="Journey Beyond Stars"
         subTitle="Cosmic Odyssey"
       />
