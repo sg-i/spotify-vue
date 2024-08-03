@@ -2,21 +2,14 @@
 import SongRow from '@/components/SongRow.vue'
 import Play from 'vue-material-design-icons/Play.vue'
 import Pause from 'vue-material-design-icons/Pause.vue'
-import DotsHorizontal from 'vue-material-design-icons/DotsHorizontal.vue'
-import Heart from 'vue-material-design-icons/Heart.vue'
 import ClockTimeThreeOutline from 'vue-material-design-icons/ClockTimeThreeOutline.vue'
 import artist from '@/artist.json'
 
 import { useSongStore } from '@/stores/song'
 import { storeToRefs } from 'pinia'
-import { onMounted } from 'vue'
 
 const useSong = useSongStore()
 const { isPlaying, currentTrack, currentArtist, likedSongs } = storeToRefs(useSong)
-
-onMounted(() => {
-  //   console.log((currentArtist.value.tracks = likedSongs.value))
-})
 
 const playFunc = () => {
   if (currentTrack.value) {

@@ -37,8 +37,6 @@ export const useSongStore = defineStore('song', {
     },
     loadDefaultSong() {
       const track = artist.tracks[1]
-      // this.loadSong(artist, track)
-
       this.currentArtist = artist
       this.currentTrack = track
 

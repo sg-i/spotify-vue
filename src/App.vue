@@ -13,7 +13,6 @@ import ChevronLeft from 'vue-material-design-icons/ChevronLeft.vue'
 import { useSongStore } from '@/stores/song'
 import { storeToRefs } from 'pinia'
 
-// import artist from '@/artist.json'
 import router from './router'
 const useSong = useSongStore()
 const { isPlaying, currentTrack } = storeToRefs(useSong)
@@ -21,15 +20,11 @@ const { isPlaying, currentTrack } = storeToRefs(useSong)
 let isMobileMenuOpen = ref(false)
 
 onMounted(() => {
-  // isPlaying.value = true
-  // useSong.loadSong(artist, artist.tracks[0])
-  // useSong.loadDefaultSong()
   isPlaying.value = false
 })
 let openMenu = ref(false)
 
 const openMobileMenu = () => {
-  console.log('opened')
   isMobileMenuOpen.value = !isMobileMenuOpen.value
 }
 </script>
@@ -163,7 +158,6 @@ const openMobileMenu = () => {
             </ul>
           </span>
         </div>
-        <!-- <perfect-scrollbar> <RouterView /> </perfect-scrollbar> -->
         <RouterView />
       </div>
     </div>

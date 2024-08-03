@@ -78,7 +78,6 @@ const removeLikedSong = () => {
       </div>
     </div>
     <div class="flex items-center">
-      <!-- <button type="button" v-if="isHover"> -->
       <button @click="isLiked ? removeLikedSong() : addLikedSong()" type="button" v-if="true">
         <Heart :class="isLiked ? 'text-green-500' : 'text-zinc-400'" :size="22" />
       </button>

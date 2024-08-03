@@ -1,11 +1,5 @@
 import { ref } from 'vue'
 
-// import { useSongStore } from '@/stores/song'
-// import { storeToRefs } from 'pinia'
-
-// // const useSong = useSongStore()
-// // const { isPlaying, audio, currentTrack, currentArtist } = storeToRefs(useSong)
-
 /**
  * React hook that allow you to enable picture in picture mode on a music player
  * @param {*} initialImage          First Image to display in background of the pip frame (required)

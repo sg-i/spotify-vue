@@ -1,5 +1,4 @@
 <script setup>
-import { toRef, watch, watchEffect } from 'vue'
 defineProps(['openMobileMenu'])
 </script>
 

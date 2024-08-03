@@ -29,11 +29,6 @@ const isImageLoaded = ref(false)
         :src="image || ''"
         @load="isImageLoaded = true"
       />
-
-      <!-- <img
-        class="absolute top-0 object-cover contrast-[0.55] -z-30 h-full w-full"
-        :src="image || ''"
-      /> -->
     </div>
   </RouterLink>
 </template>

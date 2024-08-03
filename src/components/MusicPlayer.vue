@@ -1,20 +1,10 @@
 <script setup>
 import { ref, watch, onMounted } from 'vue'
-import MusicPlayerVolume from '@/components/MusicPlayerVolume.vue'
-import Heart from 'vue-material-design-icons/Heart.vue'
-import PictureInPictureBottomRight from 'vue-material-design-icons/PictureInPictureBottomRight.vue'
-import Play from 'vue-material-design-icons/Play.vue'
-import Pause from 'vue-material-design-icons/Pause.vue'
-import SkipBackward from 'vue-material-design-icons/SkipBackward.vue'
-import SkipForward from 'vue-material-design-icons/SkipForward.vue'
-
 import { useSongStore } from '@/stores/song'
 import { storeToRefs } from 'pinia'
 
 const useSong = useSongStore()
 const { isPlaying, audio, currentTrack, currentArtist } = storeToRefs(useSong)
-let isHoverMainPlayPauseButton = ref(false)
-let isHover = ref(false)
 let isTrackTimeCurrent = ref('0:00')
 let isTrackTimeTotal = ref(null)
 let seeker = ref(null)
@@ -123,7 +113,7 @@ const PrevPip = () => {
   console.log('testfunc')
   useSong.prevSong(currentTrack.value)
 }
-const { isPipToggled, togglePip } = useAudioPictureInPicture(
+const { isPipToggled} = useAudioPictureInPicture(
   currentArtist.value.albumCover,
   isPlaying.value,
   PlayPausePip,
@@ -131,10 +121,6 @@ const { isPipToggled, togglePip } = useAudioPictureInPicture(
   PrevPip,
   NextPip
 )
-
-const togglePiPMode = () => {
-  togglePip()
-}
 
 // Функции-обработчики событий
 const handlePlay = () => {
@@ -194,11 +180,6 @@ watch(
 </script>
 
 <template lang="">
-  <!-- <div class="fixed flex top-0 z-50 w-full h-40 text-black"> -->
-  <!-- <video ref="videoPlayer" controls :src="currentArtist.albumCover"></video> -->
-  <!-- <button class="w-full h-full bg-red-200">Test</button> -->
-  <!-- <button class="w-full h-full bg-blue-200">Test 2</button> -->
-  <!-- </div> -->
   <div
     id="MusicPlayer"
     v-if="audio"
