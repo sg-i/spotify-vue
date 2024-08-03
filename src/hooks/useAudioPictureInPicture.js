@@ -78,14 +78,12 @@ export const useAudioPictureInPicture = (
   })
   // attach pause track btn on pip element
   navigator.mediaSession.setActionHandler('pause', () => {
-    console.log('pause')
     if (onPause) onPause()
     // set pause state on pip frame
     if (document.pictureInPictureElement) document.pictureInPictureElement.pause()
   })
   // attach play track btn on pip element
   navigator.mediaSession.setActionHandler('play', () => {
-    console.log('play')
     if (onPlay) onPlay()
     // set play state on pip frame
     if (document.pictureInPictureElement) document.pictureInPictureElement.play()

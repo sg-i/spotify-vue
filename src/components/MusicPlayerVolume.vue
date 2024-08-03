@@ -27,7 +27,6 @@ const muteMusic = () => {
   AudioVolume.value = 0
   vol.value = 0
   audio.value.volume = 0
-  console.log(volBeforeMute.value)
 }
 const unMuteMusic = () => {
   AudioVolume.value = volBeforeMute.value

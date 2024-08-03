@@ -21,7 +21,6 @@ onMounted(() => {
 
   if (currentTrack.value) {
     seeker.value.addEventListener('change', function () {
-      console.log('seeker change')
       const time = audio.value.duration * (seeker.value.value / 100)
       audio.value.currentTime = time
     })
@@ -43,7 +42,6 @@ onMounted(() => {
     })
 
     seeker.value.addEventListener('mouseup', function () {
-      console.log('mouseup')
       if (isPlayingBefore.value) {
         audio.value.play()
         isPlaying.value = true
@@ -51,7 +49,6 @@ onMounted(() => {
     })
 
     seekerContainer.value.addEventListener('click', function (e) {
-      console.log('click')
       const clickPosition =
         (e.pageX - seekerContainer.value.offsetLeft) / seekerContainer.value.offsetWidth
       const time = audio.value.duration * clickPosition
@@ -102,18 +99,15 @@ watch(
 )
 import { useAudioPictureInPicture } from '@/hooks/useAudioPictureInPicture'
 const PlayPausePip = () => {
-  console.log('testfunc')
   useSong.playOrPauseSong()
 }
 const NextPip = () => {
-  console.log('testfunc')
   useSong.nextSong(currentTrack.value)
 }
 const PrevPip = () => {
-  console.log('testfunc')
   useSong.prevSong(currentTrack.value)
 }
-const { isPipToggled} = useAudioPictureInPicture(
+const { isPipToggled } = useAudioPictureInPicture(
   currentArtist.value.albumCover,
   isPlaying.value,
   PlayPausePip,
@@ -124,19 +118,15 @@ const { isPipToggled} = useAudioPictureInPicture(
 
 // Функции-обработчики событий
 const handlePlay = () => {
-  console.log('Кнопка воспроизведения была нажата')
 }
 
 const handlePause = () => {
-  console.log('Кнопка паузы была нажата')
 }
 
 const handleNextSong = () => {
-  console.log('Кнопка для следующей песни была нажата')
 }
 
 const handlePrevSong = () => {
-  console.log('Кнопка для предыдущей песни была нажата')
 }
 
 watch(
@@ -154,7 +144,6 @@ watch(
 watch(
   () => isPipToggled.value,
   () => {
-    console.log(!isPipToggled.value)
     if (document.pictureInPictureElement) {
       if (isPlaying.value) {
         document.pictureInPictureElement.play()

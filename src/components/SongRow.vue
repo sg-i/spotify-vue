@@ -35,12 +35,10 @@ onMounted(() => {
 const addLikedSong = () => {
   useSong.addLikedSong(track.value)
   isLiked.value = true
-  console.log('like')
 }
 const removeLikedSong = () => {
   useSong.removeLikedSong(track.value)
   isLiked.value = false
-  console.log('dislike')
 }
 </script>
 <template>

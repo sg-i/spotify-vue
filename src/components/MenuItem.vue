@@ -43,7 +43,6 @@ const isHover = () => {
 
 <template>
   <li
-    @click="console.log(fontSize)"
     class="flex h-11 items-center justify-start cursor-pointer"
     @mouseenter="isHover()"
     @mouseleave="isHover()"
