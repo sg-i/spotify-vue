@@ -3,8 +3,17 @@ import { ref, watch, onMounted } from 'vue'
 import { useSongStore } from '@/stores/song'
 import { storeToRefs } from 'pinia'
 
+import MusicPlayerVolume from '@/components/MusicPlayerVolume.vue'
+import Heart from 'vue-material-design-icons/Heart.vue'
+import PictureInPictureBottomRight from 'vue-material-design-icons/PictureInPictureBottomRight.vue'
+import Play from 'vue-material-design-icons/Play.vue'
+import Pause from 'vue-material-design-icons/Pause.vue'
+import SkipBackward from 'vue-material-design-icons/SkipBackward.vue'
+import SkipForward from 'vue-material-design-icons/SkipForward.vue'
+
 const useSong = useSongStore()
 const { isPlaying, audio, currentTrack, currentArtist } = storeToRefs(useSong)
+
 let isTrackTimeCurrent = ref('0:00')
 let isTrackTimeTotal = ref(null)
 let seeker = ref(null)
@@ -117,17 +126,13 @@ const { isPipToggled } = useAudioPictureInPicture(
 )
 
 // Функции-обработчики событий
-const handlePlay = () => {
-}
+const handlePlay = () => {}
 
-const handlePause = () => {
-}
+const handlePause = () => {}
 
-const handleNextSong = () => {
-}
+const handleNextSong = () => {}
 
-const handlePrevSong = () => {
-}
+const handlePrevSong = () => {}
 
 watch(
   () => isPlaying.value,
