@@ -1,5 +1,5 @@
 <script setup>
-import { ref, watch, onMounted } from 'vue'
+import { ref, watch, onMounted, toRaw } from 'vue'
 import { useSongStore } from '@/stores/song'
 import { storeToRefs } from 'pinia'
 
@@ -12,7 +12,13 @@ import SkipBackward from 'vue-material-design-icons/SkipBackward.vue'
 import SkipForward from 'vue-material-design-icons/SkipForward.vue'
 
 const useSong = useSongStore()
-const { isPlaying, audio, currentTrack, currentArtist } = storeToRefs(useSong)
+const { isPlaying, audio, currentTrack, currentArtist, likedSongs } = storeToRefs(useSong)
+
+let currentTrackRef = ref(currentTrack)
+let isLiked = ref(false)
+likedSongs.value.map((el) => {
+  if (currentTrackRef.value.id == el.id) isLiked.value = true
+})
 
 let isTrackTimeCurrent = ref('0:00')
 let isTrackTimeTotal = ref(null)
@@ -21,6 +27,15 @@ let seekerContainer = ref(null)
 let range = ref(0)
 
 let isPlayingBefore = ref(false)
+
+const addLikedSong = () => {
+  useSong.addLikedSong(toRaw(currentTrack.value))
+  isLiked.value = true
+}
+const removeLikedSong = () => {
+  useSong.removeLikedSong(toRaw(currentTrack.value))
+  isLiked.value = false
+}
 
 onMounted(() => {
   if (audio.value) {
@@ -188,7 +203,10 @@ watch(
             <img class="w-full h-full object-cover" :src="currentArtist.albumCover" />
           </div>
           <div class="flex sm:hidden items-center ml-2 sm:ml-8">
-            <Heart fillColor="#1BD760" :size="20" />
+            <button @click="isLiked ? removeLikedSong() : addLikedSong()" type="button" v-if="true">
+              <Heart :class="isLiked ? 'text-green-500' : 'text-zinc-400'" :size="22" />
+            </button>
+            <!-- <Heart fillColor="#1BD760" :size="20" /> -->
           </div>
         </div>
         <div class="sm:ml-4">
@@ -205,7 +223,10 @@ watch(
         </div>
       </div>
       <div class="hidden sm:flex items-center ml-2 sm:ml-8">
-        <Heart fillColor="#1BD760" :size="20" />
+        <button @click="isLiked ? removeLikedSong() : addLikedSong()" type="button" v-if="true">
+          <Heart :class="isLiked ? 'text-green-500' : 'text-zinc-400'" :size="22" />
+        </button>
+        <!-- <Heart fillColor="#1BD760" :size="20" /> -->
       </div>
     </div>
     <div class="sm:max-w-[45%] mx-auto w-3/6 sm:w-2/4">
